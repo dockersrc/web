@@ -19,8 +19,8 @@ dockermgr update web
 ## Install and run container
   
 ```shell
-dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/web/web/latest/rootfs"
-mkdir -p "/var/lib/srv/$USER/docker/web/rootfs"
+dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/web/web/latest/volumes"
+mkdir -p "/var/lib/srv/$USER/docker/web/volumes"
 git clone "https://github.com/dockermgr/web" "$HOME/.local/share/CasjaysDev/dockermgr/web"
 cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/web/rootfs/." "$dockerHome/"
 docker run -d \
@@ -47,8 +47,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=web
     volumes:
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/web/web/latest/rootfs/data:/data:z"
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/web/web/latest/rootfs/config:/config:z"
+      - "/var/lib/srv/$USER/docker/casjaysdevdocker/web/web/latest/volumes/data:/data:z"
+      - "/var/lib/srv/$USER/docker/casjaysdevdocker/web/web/latest/volumes/config:/config:z"
     ports:
       - 80:80
     restart: always
