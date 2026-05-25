@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
 # - - - - - - - - - - - - - - - - - - - - - - - - -
-##@Version           :  202601292017-git
+##@Version           :  202605242059-git
 # @@Author           :  CasjaysDev
 # @@Contact          :  CasjaysDev <docker-admin@casjaysdev.pro>
 # @@License          :  MIT
 # @@Copyright        :  Copyright 2026 CasjaysDev
-# @@Created          :  Thu Jan 29 08:17:15 PM EST 2026
+# @@Created          :  Sun May 24 08:59:38 PM EDT 2026
 # @@File             :  01-system.sh
 # @@Description      :  script to run system
 # @@Changelog        :  newScript
@@ -34,9 +34,10 @@ exitCode=0
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # Set the exit code
-#exitCode=$?
+exitCode=$?
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 exit $exitCode
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # ex: ts=2 sw=2 et filetype=sh
 # - - - - - - - - - - - - - - - - - - - - - - - - -
+

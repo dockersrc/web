@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
 # - - - - - - - - - - - - - - - - - - - - - - - - -
-##@Version           :  202601292017-git
+##@Version           :  202605242059-git
 # @@Author           :  CasjaysDev
 # @@Contact          :  CasjaysDev <docker-admin@casjaysdev.pro>
 # @@License          :  MIT
 # @@Copyright        :  Copyright 2026 CasjaysDev
-# @@Created          :  Thu Jan 29 08:17:16 PM EST 2026
+# @@Created          :  Sun May 24 08:59:39 PM EDT 2026
 # @@File             :  07-cleanup.sh
 # @@Description      :  script to run cleanup
 # @@Changelog        :  newScript
@@ -24,7 +24,7 @@ set -o pipefail
 [ "$DEBUGGER" = "on" ] && echo "Enabling debugging" && set -x$DEBUGGER_OPTIONS
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # Load functions
-__find_and_remove() { [ -z "$1" ] || find "${2:-/etc}" -iname "$1" -exec rm -Rf {} \; 2>/dev/null; }
+__find_and_remove() { [ -z "$1" ] || find "${2:-/etc}" -iname "$1" -exec rm -Rf {} + 2>/dev/null; }
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # Set env variables
 exitCode=0
@@ -38,9 +38,10 @@ if [ -d "$HOME/.cache" ]; then rm -Rf "$HOME/.cache"; fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # Set the exit code
-#exitCode=$?
+exitCode=$?
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 exit $exitCode
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # ex: ts=2 sw=2 et filetype=sh
 # - - - - - - - - - - - - - - - - - - - - - - - - -
+

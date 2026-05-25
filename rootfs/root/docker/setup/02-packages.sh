@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
 # - - - - - - - - - - - - - - - - - - - - - - - - -
-##@Version           :  202601292017-git
+##@Version           :  202605242139-git
 # @@Author           :  CasjaysDev
 # @@Contact          :  CasjaysDev <docker-admin@casjaysdev.pro>
 # @@License          :  MIT
 # @@Copyright        :  Copyright 2026 CasjaysDev
-# @@Created          :  Thu Jan 29 08:17:16 PM EST 2026
+# @@Created          :  Sun May 24 08:59:38 PM EDT 2026
 # @@File             :  02-packages.sh
 # @@Description      :  script to run packages
 # @@Changelog        :  newScript
@@ -31,59 +31,20 @@ exitCode=0
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # Main script
-
-# Install yay AUR helper if on Arch Linux
-if [ -f /etc/arch-release ]; then
-  echo "Detected Arch Linux - Installing yay AUR helper..."
-  
-  # Install yay AUR helper if not present
-  if ! command -v yay >/dev/null 2>&1; then
-    echo "Installing yay AUR helper..."
-    
-    # Ensure abc user exists and has sudo rights
-    if ! id -u abc >/dev/null 2>&1; then
-      useradd -m -s /bin/bash abc
-    fi
-    echo "abc ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/abc
-    
-    # Clone and build yay as abc user
-    rm -rf /tmp/yay
-    cd /tmp
-    git clone --depth 1 https://aur.archlinux.org/yay.git
-    chown -R abc:abc /tmp/yay
-    
-    # Build yay with proper error handling
-    cd /tmp/yay
-    su - abc -c "cd /tmp/yay && makepkg -si --noconfirm --needed" || {
-      echo "ERROR: yay build failed, trying alternative method..."
-      # Alternative: use yay-bin from AUR (pre-compiled)
-      cd /tmp
-      rm -rf /tmp/yay-bin
-      git clone --depth 1 https://aur.archlinux.org/yay-bin.git
-      chown -R abc:abc /tmp/yay-bin
-      cd /tmp/yay-bin
-      su - abc -c "cd /tmp/yay-bin && makepkg -si --noconfirm --needed"
-    }
-    
-    # Cleanup
-    cd /
-    rm -rf /tmp/yay /tmp/yay-bin
-    
-    if command -v yay >/dev/null 2>&1; then
-      echo "yay installed successfully"
-    else
-      echo "WARNING: yay installation failed"
-    fi
-  fi
-  
-  echo "XFCE4 and yay installation complete"
+if command -v update-ca-certificates >/dev/null 2>&1; then
+  update-ca-certificates
+elif command -v update-ca-trust >/dev/null 2>&1; then
+  update-ca-trust extract
+elif command -v trust >/dev/null 2>&1; then
+  trust extract-compat
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # Set the exit code
-#exitCode=$?
+exitCode=$?
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 exit $exitCode
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 # ex: ts=2 sw=2 et filetype=sh
 # - - - - - - - - - - - - - - - - - - - - - - - - -
+
